@@ -36,6 +36,8 @@ find /motioneye -iname '*.so' -exec strip '{}' \;
 
 FROM base AS motioneye
 
+LABEL maintainer="Chris 'sh0shin' Frage <git@sh0shin.org>"
+
 RUN mkdir -p /etc/motioneye /var/lib/motioneye /var/log/motioneye /var/run/motioneye && \
 chown -R motion:motion /etc/motioneye /var/lib/motioneye /var/log/motioneye /var/run/motioneye
 
