@@ -21,7 +21,7 @@ apk upgrade --no-cache --purge --latest --prune && \
 apk add --no-cache --purge --latest --upgrade \
 build-base \
 curl-dev \
-jpeg-dev \
+libjpeg-turbo-dev \
 python3-dev \
 && rm -rf /var/cache/apk/*
 
