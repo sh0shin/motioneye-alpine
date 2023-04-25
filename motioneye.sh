@@ -24,7 +24,12 @@ MOTIONEYE_DATA="/data/motioneye"
 [ ! -d "${MOTIONEYE_DATA}/nginx/log" ] && mkdir -p "${MOTIONEYE_DATA}/nginx/log"
 [ ! -d "${MOTIONEYE_DATA}/nginx/ssl" ] && mkdir -p "${MOTIONEYE_DATA}/nginx/ssl"
 
-[ -f "${MOTIONEYE_DATA}/nginx/ssl/motioneye.pem" ] && MOTIONEYE_PORTS+=( --publish 8443:8443 )
+if [ -f "${MOTIONEYE_DATA}/nginx/ssl/motioneye.crt.pem" ] && [ -f "${MOTIONEYE_DATA}/nginx/ssl/motioneye.crt.pem" ]
+then
+  MOTIONEYE_PORTS+=(
+    --publish 8443:8443
+  )
+fi
 
 MOTIONEYE_ID="$( docker container ls --quiet --filter "name=$MOTIONEYE_NAME" )"
 
