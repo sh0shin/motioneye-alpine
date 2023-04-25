@@ -14,7 +14,7 @@ MOTIONEYE_PORTS=(
 MOTIONEYE_IMAGE="sh0shin/motioneye-alpine"
 MOTIONEYE_TAG="devel"
 
-MOTIONEYE_DATA="${PWD}/data/motioneye"
+MOTIONEYE_DATA="/data/motioneye"
 
 [ -d "${MOTIONEYE_DATA}/video" ] && mv "${MOTIONEYE_DATA}/video" "${MOTIONEYE_DATA}/media"
 
