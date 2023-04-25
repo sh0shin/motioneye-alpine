@@ -8,6 +8,7 @@ apk add --no-cache --purge --latest --upgrade \
 curl \
 ffmpeg \
 motion \
+nginx \
 python3 \
 v4l-utils \
 && rm -rf /var/cache/apk/* && find / -depth -regex '^.*\(__pycache__\|\.py[co]\)$' -delete
@@ -39,15 +40,23 @@ FROM base AS motioneye
 LABEL maintainer="Chris 'sh0shin' Frage <git@sh0shin.org>"
 
 RUN mkdir -p /etc/motioneye /var/lib/motioneye /var/log/motioneye /var/run/motioneye && \
-chown -R motion:motion /etc/motioneye /var/lib/motioneye /var/log/motioneye /var/run/motioneye
+chown -R motion:motion /etc/motioneye /var/lib/motioneye /var/log/motioneye /var/run/motioneye && \
+rm /etc/nginx/http.d/default.conf && mkdir -p /var/lib/nginx/ssl
 
 COPY --chown=motion:motion --from=build /motioneye /motioneye
+COPY nginx-motioneye.conf /motioneye/nginx-motioneye.conf
+COPY nginx-motioneye-ssl.conf /motioneye/nginx-motioneye-ssl.conf
+
 COPY entrypoint.sh /entrypoint.sh
 
 VOLUME /etc/motioneye
 VOLUME /var/lib/motioneye
+VOLUME /var/lib/nginx/ssl
 VOLUME /var/log/motioneye
+VOLUME /var/log/nginx
 
+EXPOSE 8080
+EXPOSE 8443
 EXPOSE 8765
 
 ENTRYPOINT ["/entrypoint.sh"]
