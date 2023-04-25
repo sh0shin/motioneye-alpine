@@ -11,15 +11,15 @@ chown -R motion:motion \
   /var/lib/motioneye \
   /var/log/motioneye
 
-if [ -f /var/lib/nginx/ssl/motioneye.pem ]
+if [ -f /var/lib/nginx/ssl/motioneye.crt.pem ] && [ -f /var/lib/nginx/ssl/motioneye.key.pem ]
 then
   cp /motioneye/nginx-motioneye-ssl.conf /etc/nginx/http.d/
+  [ ! -f /var/lib/nginx/ssl/dhparam.pem ] && openssl dhparam -out /var/lib/nginx/ssl/dhparam.pem 2048
 else
   cp /motioneye/nginx-motioneye.conf /etc/nginx/http.d/
 fi
 
 chown -R nginx:nginx \
-  /var/lib/nginx/ssl \
   /var/log/nginx
 
 nginx -t && nginx
