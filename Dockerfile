@@ -9,6 +9,7 @@ curl \
 ffmpeg \
 motion \
 nginx \
+openssl \
 python3 \
 v4l-utils \
 && rm -rf /var/cache/apk/* && find / -depth -regex '^.*\(__pycache__\|\.py[co]\)$' -delete
