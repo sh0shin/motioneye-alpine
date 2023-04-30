@@ -22,6 +22,7 @@ fi
 chown -R nginx:nginx \
   /var/log/nginx
 
+crond
 nginx -t && nginx
 
 exec su motion -s /bin/ash -c "source /motioneye/bin/activate && exec meyectl startserver -c /etc/motioneye/motioneye.conf -l"

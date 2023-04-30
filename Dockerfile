@@ -7,6 +7,7 @@ apk upgrade --no-cache --purge --latest --prune && \
 apk add --no-cache --purge --latest --upgrade \
 curl \
 ffmpeg \
+logrotate \
 motion \
 nginx \
 openssl \
@@ -47,6 +48,9 @@ rm /etc/nginx/http.d/default.conf && mkdir -p /var/lib/nginx/ssl
 COPY --chown=motion:motion --from=build /motioneye /motioneye
 COPY nginx-motioneye.conf /motioneye/nginx-motioneye.conf
 COPY nginx-motioneye-ssl.conf /motioneye/nginx-motioneye-ssl.conf
+
+COPY logrotate-nginx /etc/logrotate.d/nginx
+COPY logrotate-motioneye /etc/logrotate.d/motioneye
 
 COPY entrypoint.sh /entrypoint.sh
 
