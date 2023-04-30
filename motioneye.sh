@@ -31,12 +31,12 @@ then
   )
 fi
 
-MOTIONEYE_ID="$( docker container ls --quiet --filter "name=$MOTIONEYE_NAME" )"
+MOTIONEYE_ID="$( docker container ls --quiet --all --filter "name=$MOTIONEYE_NAME" )"
 
 if [ -n "$MOTIONEYE_ID" ]
 then
-  docker stop "$MOTIONEYE_NAME"
-  docker container rm "$MOTIONEYE_NAME"
+  docker stop "$MOTIONEYE_ID"
+  docker container rm "$MOTIONEYE_ID"
 fi
 
 docker pull "${MOTIONEYE_IMAGE}:${MOTIONEYE_TAG}"
