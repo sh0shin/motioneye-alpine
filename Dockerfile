@@ -50,7 +50,7 @@ COPY nginx-motioneye.conf /motioneye/nginx-motioneye.conf
 COPY nginx-motioneye-ssl.conf /motioneye/nginx-motioneye-ssl.conf
 
 COPY logrotate-nginx /etc/logrotate.d/nginx
-COPY logrotate-motioneye /etc/logrotate.d/motioneye
+#COPY logrotate-motioneye /etc/logrotate.d/motioneye
 
 COPY entrypoint.sh /entrypoint.sh
 
