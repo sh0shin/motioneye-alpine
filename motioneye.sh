@@ -53,5 +53,3 @@ docker run \
   --volume "${MOTIONEYE_DATA}/nginx/log:/var/log/nginx" \
   --volume "${MOTIONEYE_DATA}/nginx/ssl:/var/lib/nginx/ssl" \
   "${MOTIONEYE_IMAGE}:${MOTIONEYE_TAG}"
-
-docker exec "$MOTIONEYE_NAME" /usr/sbin/logrotate --force /etc/logrotate.conf || :
