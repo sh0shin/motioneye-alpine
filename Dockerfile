@@ -32,7 +32,7 @@ python3-dev \
 RUN python3 -m venv --symlinks /motioneye && \
 . /motioneye/bin/activate && \
 pip install --isolated --no-cache-dir --no-compile --no-input --prefer-binary --upgrade pip setuptools wheel && \
-pip install --isolated --no-cache-dir --no-compile --no-input --prefer-binary --upgrade https://github.com/motioneye-project/motioneye/archive/dev.tar.gz && \
+pip install --isolated --no-cache-dir --no-compile --no-input --prefer-binary --upgrade --pre motioneye && \
 pip uninstall --isolated --no-cache-dir --no-input --yes  pip setuptools wheel && \
 find / -depth -regex '^.*\(__pycache__\|\.py[co]\)$' -delete && \
 find /motioneye -iname '*.so' -exec strip '{}' \;
