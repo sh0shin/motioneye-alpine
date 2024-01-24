@@ -1,14 +1,14 @@
-FROM alpine:edge AS base
+FROM alpine:3.19 AS base
 
 # hadolint ignore=DL3018
-RUN echo "https://dl-cdn.alpinelinux.org/alpine/edge/testing" >> /etc/apk/repositories && \
+RUN echo "@testing https://dl-cdn.alpinelinux.org/alpine/edge/testing" >> /etc/apk/repositories && \
 apk update && \
 apk upgrade --no-cache --purge --latest --prune && \
 apk add --no-cache --purge --latest --upgrade \
 curl \
 ffmpeg \
 logrotate \
-motion \
+motion@testing \
 nginx \
 openssl \
 python3 \
@@ -18,10 +18,7 @@ v4l-utils \
 FROM base AS build
 
 # hadolint ignore=DL3018
-RUN echo "https://dl-cdn.alpinelinux.org/alpine/edge/testing" >> /etc/apk/repositories && \
-apk update && \
-apk upgrade --no-cache --purge --latest --prune && \
-apk add --no-cache --purge --latest --upgrade \
+RUN apk add --no-cache --purge --latest --upgrade \
 build-base \
 curl-dev \
 libjpeg-turbo-dev \
