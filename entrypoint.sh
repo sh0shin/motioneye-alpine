@@ -30,6 +30,7 @@ case "$( uname -v )"
 in
   FreeBSD*)
     chmod +s /usr/bin/python3.*
+    sed -i 's/worker_processes auto;/worker_processes 1;/g' /etc/nginx/nginx.conf
   ;;
 esac
 
