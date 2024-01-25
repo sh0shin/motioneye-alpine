@@ -23,7 +23,6 @@ chown -R nginx:nginx \
   /var/log/nginx
 
 crond
-nginx -t && nginx
 
 # podman-freebsd
 case "$( uname -v )"
@@ -33,5 +32,7 @@ in
     sed -i 's/worker_processes auto;/worker_processes 1;/g' /etc/nginx/nginx.conf
   ;;
 esac
+
+nginx -t && nginx
 
 exec su motion -s /bin/ash -c "source /motioneye/bin/activate && exec meyectl startserver -c /etc/motioneye/motioneye.conf -l"
