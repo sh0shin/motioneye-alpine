@@ -25,4 +25,12 @@ chown -R nginx:nginx \
 crond
 nginx -t && nginx
 
+# podman-freebsd
+case "$( uname -v )"
+in
+  FreeBSD*)
+    chmod +s /usr/bin/python3.*
+  ;;
+esac
+
 exec su motion -s /bin/ash -c "source /motioneye/bin/activate && exec meyectl startserver -c /etc/motioneye/motioneye.conf -l"
