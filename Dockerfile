@@ -1,4 +1,4 @@
-FROM alpine:3.19 AS base
+FROM alpine:3.20 AS base
 
 # hadolint ignore=DL3018
 RUN echo "@testing https://dl-cdn.alpinelinux.org/alpine/edge/testing" >> /etc/apk/repositories && \
@@ -13,6 +13,7 @@ nginx \
 openssl \
 python3 \
 v4l-utils \
+tzdata \
 && rm -rf /var/cache/apk/* && find / -depth -regex '^.*\(__pycache__\|\.py[co]\)$' -delete
 
 FROM base AS build
@@ -30,7 +31,7 @@ RUN python3 -m venv --symlinks /motioneye && \
 . /motioneye/bin/activate && \
 pip install --isolated --no-cache-dir --no-compile --no-input --prefer-binary --upgrade pip setuptools wheel && \
 pip install --isolated --no-cache-dir --no-compile --no-input --prefer-binary --upgrade --pre motioneye && \
-pip uninstall --isolated --no-cache-dir --no-input --yes  pip setuptools wheel && \
+pip uninstall --isolated --no-cache-dir --no-input --yes pip setuptools wheel && \
 find / -depth -regex '^.*\(__pycache__\|\.py[co]\)$' -delete && \
 find /motioneye -iname '*.so' -exec strip '{}' \;
 
